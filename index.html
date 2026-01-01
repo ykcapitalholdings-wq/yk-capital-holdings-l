@@ -3,91 +3,246 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Y&K Capital Holdings LLC — US ↔ Turkey Logistics</title>
-  <meta name="description" content="US↔Turkey trade & logistics coordination. Fast quotes, bilingual comms, proactive updates." />
-  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="expires" content="0" />
+  <title>Y&K Capital Holdings LLC — US ↔ Turkey Logistics Coordination</title>
+  <meta name="description" content="US↔Turkey trade & logistics coordination. Fast quoting, bilingual communication (EN/TR), proactive shipment updates." />
+
+  <!-- Social share (WhatsApp / LinkedIn) -->
+  <meta property="og:title" content="Y&K Capital Holdings LLC — US ↔ Turkey Logistics Coordination" />
+  <meta property="og:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates—via a trusted partner network." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ykcapitalholdings-wq.github.io/yk-capital-holdings-l/" />
+  <!-- If you add a logo later, set og:image to a hosted image URL -->
 
   <style>
-    :root{--bg:#0b0f19;--card:#121a2b;--border:#22314d;--muted:#cdd8f6;--muted2:#aebbe3;--accent:#2b5cff}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:#e8eefc}
-    .wrap{max-width:980px;margin:0 auto;padding:64px 18px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
-    h1{font-size:40px;margin:0 0 10px;letter-spacing:-.5px}
-    p{line-height:1.55;color:var(--muted);margin:10px 0}
-    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    a.btn{display:inline-block;padding:12px 16px;border-radius:12px;text-decoration:none;border:1px solid #2a3d63;color:#e8eefc}
-    a.btn:hover{opacity:.92}
-    a.primary{background:var(--accent);border-color:var(--accent)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
-    .mini{background:#0f1524;border:1px solid var(--border);border-radius:14px;padding:16px}
-    .small{font-size:13px;color:var(--muted2);margin-top:18px}
-    .divider{margin:22px 0;border-top:1px solid var(--border)}
-    .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;background:#0f1524;border:1px solid var(--border);color:var(--muted2)}
-    .twoCol{display:grid;grid-template-columns:1fr;gap:10px}
-    @media(min-width:860px){.twoCol{grid-template-columns:1fr 1fr}}
+    :root{
+      --bg:#0b0f19;
+      --panel:#0f1524;
+      --card:#121a2b;
+      --border:#22314d;
+      --text:#e8eefc;
+      --muted:#cdd8f6;
+      --muted2:#aebbe3;
+      --accent:#2b5cff;
+      --accent2:#5b7cff;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin:0; background:var(--bg); color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1040px;margin:0 auto;padding:26px 18px 70px}
+    .nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(160%) blur(10px);
+      background:rgba(11,15,25,.72);
+      border-bottom:1px solid rgba(34,49,77,.65);
+    }
+    .navinner{max-width:1040px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px}
+    .badge{
+      display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;
+      background:var(--panel); border:1px solid var(--border); color:var(--muted2);
+    }
+    .links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .links a{
+      font-size:13px; color:var(--muted2); text-decoration:none;
+      padding:8px 10px;border-radius:10px;border:1px solid transparent;
+    }
+    .links a:hover{border-color:var(--border); color:var(--text)}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      display:inline-block; padding:12px 16px; border-radius:12px;
+      text-decoration:none; border:1px solid #2a3d63; color:var(--text);
+      background:transparent;
+    }
+    .btn:hover{opacity:.92}
+    .primary{background:var(--accent); border-color:var(--accent)}
+    .ghost{background:var(--panel); border-color:var(--border); color:var(--muted)}
+    h1{font-size:44px; margin:18px 0 10px; letter-spacing:-.7px; line-height:1.05}
+    h2{font-size:20px; margin:0 0 10px}
+    p{color:var(--muted); line-height:1.6; margin:10px 0}
+    .hero{
+      margin-top:26px;
+      background:linear-gradient(180deg, rgba(18,26,43,.85), rgba(15,21,36,.55));
+      border:1px solid var(--border); border-radius:18px; padding:26px;
+    }
+    .grid{display:grid;gap:14px;margin-top:14px}
+    @media(min-width:860px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:16px;
+    }
+    .miniTitle{font-weight:650; margin:2px 0 6px}
+    .small{font-size:13px;color:var(--muted2)}
+    .section{margin-top:18px}
+    .divider{border-top:1px solid var(--border); margin:18px 0}
+    .twoCol{display:grid;gap:12px}
+    @media(min-width:860px){ .twoCol{grid-template-columns:1fr 1fr} }
+    .list{margin:0;padding-left:18px;color:var(--muted)}
+    .list li{margin:8px 0}
+    .footer{
+      margin-top:22px; padding-top:14px; border-top:1px solid var(--border);
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center;
+    }
+    .mutedLink{color:var(--muted2);text-decoration:none}
+    .mutedLink:hover{text-decoration:underline}
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <span class="badge">US ↔ TR</span>
 
-      <h1>Y&K Capital Holdings LLC</h1>
-      <p><strong>US ↔ Turkey Trade & Logistics Coordination</strong><br/>
+<body>
+  <!-- Top Nav -->
+  <div class="nav">
+    <div class="navinner">
+      <div class="brand">
+        <span class="badge">US ↔ TR</span>
+        <div>
+          <div style="font-weight:750;letter-spacing:-.2px">Y&K Capital Holdings LLC</div>
+          <div class="small">Trade & Logistics Coordination</div>
+        </div>
+      </div>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#quote">Get a Quote</a>
+        <a href="#bilingual">EN/TR</a>
+        <a href="./market-pulse.html">Market Pulse</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- Hero -->
+    <div class="hero">
+      <h1>US ↔ Turkey<br/>Logistics Coordination</h1>
+      <p>
         Fast quoting, bilingual communication (EN/TR), and proactive shipment updates—powered by a trusted partner network.
       </p>
 
-      <div class="row">
+      <div class="btnrow">
         <a class="btn primary" href="mailto:ykcapitalholdings@gmail.com?subject=Quote%20Request%20(US%E2%86%94TR)">Get a Quote (Email)</a>
 
         <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20Holdings%20%E2%80%94%20I%E2%80%99d%20like%20a%20shipping%20quote%20(US%E2%86%94TR).%20Pickup:%20__%20Delivery:%20__%20Weight(kg):%20__%20Volume(CBM):%20__%20Incoterm:%20__%20Ready%20date:%20__">WhatsApp Quote</a>
 
-        <a class="btn" href="./market-pulse.html">Market Pulse</a>
+        <a class="btn ghost" href="https://instagram.com/ykcapitalholdings">Instagram</a>
 
-        <a class="btn" href="https://instagram.com/ykcapitalholdings">Instagram</a>
+        <a class="btn ghost" href="./market-pulse.html">Market Pulse</a>
       </div>
 
-      <div class="grid">
-        <div class="mini">
-          <strong>Ocean Freight (FCL/LCL)</strong>
-          <p>Route options, coordination, milestone tracking.</p>
-        </div>
-        <div class="mini">
-          <strong>Air Freight</strong>
-          <p>Time-sensitive support with status updates.</p>
-        </div>
-        <div class="mini">
-          <strong>Docs & Customs Handoff</strong>
-          <p>We coordinate required documents and broker/forwarder handoffs.</p>
-        </div>
-      </div>
-
-      <p class="small">
+      <p class="small" style="margin-top:14px">
         Note: Services provided through licensed carrier/forwarding and customs partners where required.
       </p>
+    </div>
 
-      <div class="divider"></div>
+    <!-- Services -->
+    <div class="section" id="services">
+      <h2>Services</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="miniTitle">Ocean Freight (FCL/LCL)</div>
+          <p class="small">Route options, coordination, milestone tracking.</p>
+        </div>
+        <div class="card">
+          <div class="miniTitle">Air Freight</div>
+          <p class="small">Time-sensitive support with status updates.</p>
+        </div>
+        <div class="card">
+          <div class="miniTitle">Docs & Customs Handoff</div>
+          <p class="small">We coordinate required documents and broker/forwarder handoffs.</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- How it works -->
+    <div class="section" id="how">
+      <h2>How it works</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="miniTitle">1) Share details</div>
+          <p class="small">Pickup, delivery, cargo, weight/CBM, incoterm, ready date.</p>
+        </div>
+        <div class="card">
+          <div class="miniTitle">2) We send options</div>
+          <p class="small">2–3 choices with time/cost tradeoffs and next steps.</p>
+        </div>
+        <div class="card">
+          <div class="miniTitle">3) Execute & track</div>
+          <p class="small">Pickup → export → transit → delivery coordination, with updates.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote checklist -->
+    <div class="section" id="quote">
+      <h2>Get a Quote</h2>
       <div class="twoCol">
-        <div>
-          <p><strong>EN 🇺🇸</strong><br/>
-            We help businesses plan US↔Turkey shipments with clear communication, transparent routing, and regular updates.
-          </p>
+        <div class="card">
+          <div class="miniTitle">Send us this info (fastest quote)</div>
+          <ul class="list">
+            <li>Pickup city/state + delivery city</li>
+            <li>Cargo description + packaging type (boxes/pallets)</li>
+            <li>Weight (kg) + volume (CBM) / dimensions</li>
+            <li>Incoterm (EXW / FOB / CIF / DDP)</li>
+            <li>Ready date + any deadline</li>
+          </ul>
+          <div class="btnrow" style="margin-top:14px">
+            <a class="btn primary" href="mailto:ykcapitalholdings@gmail.com?subject=Quote%20Request%20(US%E2%86%94TR)">Email Quote Request</a>
+            <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20Holdings%20%E2%80%94%20I%E2%80%99d%20like%20a%20shipping%20quote%20(US%E2%86%94TR).%20Pickup:%20__%20Delivery:%20__%20Weight(kg):%20__%20Volume(CBM):%20__%20Incoterm:%20__%20Ready%20date:%20__">WhatsApp Quote</a>
+          </div>
         </div>
 
-        <div>
-          <p><strong>TR 🇹🇷</strong><br/>
-            ABD↔Türkiye sevkiyatlarında net iletişim, şeffaf planlama ve düzenli bilgilendirme ile destek oluruz.
+        <div class="card">
+          <div class="miniTitle">What you’ll receive</div>
+          <ul class="list">
+            <li>Recommended shipping mode (Ocean/Air)</li>
+            <li>Routing & timeline overview</li>
+            <li>Document checklist (basic)</li>
+            <li>Operational notes if any disruption/holiday schedule</li>
+          </ul>
+          <p class="small" style="margin-top:10px">
+            Tip: If you already have a commercial invoice or packing list, attach it to your email for faster turnaround.
           </p>
         </div>
       </div>
-
-      <p class="small">
-        Not: Gerekli durumlarda hizmetler, lisanslı taşıyıcı/forwarder ve gümrük iş ortakları üzerinden sağlanır.
-      </p>
     </div>
+
+    <div class="divider"></div>
+
+    <!-- Bilingual -->
+    <div class="section" id="bilingual">
+      <h2>EN / TR</h2>
+      <div class="twoCol">
+        <div class="card">
+          <div class="miniTitle">EN 🇺🇸</div>
+          <p class="small">
+            We support US↔Turkey shipments with clear communication, transparent routing, and proactive updates—via a trusted partner network.
+          </p>
+        </div>
+        <div class="card">
+          <div class="miniTitle">TR 🇹🇷</div>
+          <p class="small">
+            ABD↔Türkiye sevkiyatlarında net iletişim, şeffaf planlama ve proaktif bilgilendirme ile destek oluruz—güvenilir iş ortakları ağıyla.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="small">
+        Business inquiries: <a class="mutedLink" href="mailto:ykcapitalholdings@gmail.com">ykcapitalholdings@gmail.com</a>
+      </div>
+      <div class="small">
+        <a class="mutedLink" href="https://instagram.com/ykcapitalholdings">Instagram</a> ·
+        <a class="mutedLink" href="./market-pulse.html">Market Pulse</a>
+      </div>
+    </div>
+
+    <div class="small" style="margin-top:10px">
+      Note: Services provided through licensed carrier/forwarding and customs partners where required.<br/>
+      Not: Gerekli durumlarda hizmetler, lisanslı taşıyıcı/forwarder ve gümrük iş ortakları üzerinden sağlanır.
+    </div>
+
   </div>
 </body>
 </html>
