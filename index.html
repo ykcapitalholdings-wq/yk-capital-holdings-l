@@ -14,18 +14,22 @@
     p{line-height:1.55;color:var(--muted);margin:10px 0}
     .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     a.btn{display:inline-block;padding:12px 16px;border-radius:12px;text-decoration:none;border:1px solid #2a3d63;color:#e8eefc}
+    a.btn:hover{opacity:.92}
     a.primary{background:var(--accent);border-color:var(--accent)}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
     .mini{background:#0f1524;border:1px solid var(--border);border-radius:14px;padding:16px}
     .small{font-size:13px;color:var(--muted2);margin-top:18px}
     .divider{margin:22px 0;border-top:1px solid var(--border)}
     .badge{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;background:#0f1524;border:1px solid var(--border);color:var(--muted2)}
+    .twoCol{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:860px){.twoCol{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <span class="badge">US ↔ TR</span>
+
       <h1>Y&K Capital Holdings LLC</h1>
       <p><strong>US ↔ Turkey Trade & Logistics Coordination</strong><br/>
         Fast quoting, bilingual communication (EN/TR), and proactive shipment updates—powered by a trusted partner network.
@@ -33,7 +37,11 @@
 
       <div class="row">
         <a class="btn primary" href="mailto:ykcapitalholdings@gmail.com?subject=Quote%20Request%20(US%E2%86%94TR)">Get a Quote (Email)</a>
+
         <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20Holdings%20%E2%80%94%20I%E2%80%99d%20like%20a%20shipping%20quote%20(US%E2%86%94TR).%20Pickup:%20__%20Delivery:%20__%20Weight(kg):%20__%20Volume(CBM):%20__%20Incoterm:%20__%20Ready%20date:%20__">WhatsApp Quote</a>
+
+        <a class="btn" href="./market-pulse.html">Market Pulse</a>
+
         <a class="btn" href="https://instagram.com/ykcapitalholdings">Instagram</a>
       </div>
 
@@ -52,10 +60,30 @@
         </div>
       </div>
 
+      <p class="small">
+        Note: Services provided through licensed carrier/forwarding and customs partners where required.
+      </p>
+
       <div class="divider"></div>
 
-      <p><strong>TR 🇹🇷</strong><br/>
-        <strong>ABD ↔ Türkiye Ticaret & Lojistik Koordinasyonu</strong><br/>
-        Hızlı fiyatlama, çift dilli iletişim (EN/TR) ve proaktif
-        <a class="btn" href="./market-pulse.html">Market Pulse</a>
+      <div class="twoCol">
+        <div>
+          <p><strong>EN 🇺🇸</strong><br/>
+            We help businesses plan US↔Turkey shipments with clear communication, transparent routing, and regular updates.
+          </p>
+        </div>
 
+        <div>
+          <p><strong>TR 🇹🇷</strong><br/>
+            ABD↔Türkiye sevkiyatlarında net iletişim, şeffaf planlama ve düzenli bilgilendirme ile destek oluruz.
+          </p>
+        </div>
+      </div>
+
+      <p class="small">
+        Not: Gerekli durumlarda hizmetler, lisanslı taşıyıcı/forwarder ve gümrük iş ortakları üzerinden sağlanır.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
