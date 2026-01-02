@@ -23,6 +23,7 @@
     .value{font-size:34px;font-weight:900;margin-top:10px}
     .meta{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
     code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:8px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#eaf0ff}
   </style>
 </head>
 
@@ -32,21 +33,24 @@
       <div>
         <h1>Market Pulse</h1>
         <div class="muted">Auto-updated where possible. Manual for paid/proprietary indices.</div>
-        <div class="muted" id="updated">Loading data…</div>
+        <div class="muted" id="updated">Loading…</div>
       </div>
-      <div><a href="index.html">← Back to Home</a></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="btn" href="index.html">← Back to Home</a>
+        <button class="btn" id="refreshBtn" type="button">Refresh</button>
+      </div>
     </div>
 
     <div class="grid" id="cards"></div>
 
     <div class="muted" style="margin-top:14px">
-      If you see “Couldn’t load data”, make sure <code>data/market.json</code> exists in your repo and is deployed by GitHub Pages.
+      If you see “Couldn’t load data”, make sure <code>data/market.json</code> exists in your repo.
     </div>
   </div>
 
   <script>
     function fmt(x){
-      if (x === null || x === undefined || Number.isNaN(x)) return "—";
+      if (x === null || x === undefined || Number.isNaN(Number(x))) return "—";
       const n = Number(x);
       return (Math.abs(n) >= 1000)
         ? n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -72,15 +76,14 @@
       const updatedEl = document.getElementById("updated");
 
       try{
-        // Cache-bust so you always get the newest JSON from GitHub Pages/CDN
-        const url = data/market.json?v=${Date.now()};
+        // Use absolute path so it works no matter what
+        const url = /data/market.json?v=${Date.now()};
         const resp = await fetch(url, { cache: "no-store" });
         if(!resp.ok) throw new Error("HTTP " + resp.status);
 
         const data = await resp.json();
 
-        updatedEl.textContent =
-          "Last sync (UTC): " + (data.updated_at || data.generated_at || "—");
+        updatedEl.textContent = "Last sync (UTC): " + (data.updated_at || data.generated_at || "—");
 
         const series = data.series || {};
         const usdtry = series.usdtry || {};
@@ -90,24 +93,25 @@
 
         cardsEl.innerHTML =
           card("USD/TRY", fmt(usdtry.value), usdtry.unit || "TRY per USD", usdtry.source || "auto", usdtry.as_of) +
-          card("Drewry WCI", wci.value ?? "—", wci.unit || "USD/40ft", wci.source || "manual", wci.as_of) +
-          card("BDI", bdi.value ?? "—", bdi.unit || "Index", bdi.source || "manual", bdi.as_of) +
-          card("Freightos FBX", fbx.value ?? "—", fbx.unit || "Index / USD", fbx.source || "manual", fbx.as_of);
+          card("Drewry WCI", fmt(wci.value), wci.unit || "USD/40ft", wci.source || "manual", wci.as_of) +
+          card("BDI", fmt(bdi.value), bdi.unit || "Index", bdi.source || "manual", bdi.as_of) +
+          card("Freightos FBX", fmt(fbx.value), fbx.unit || "Index", fbx.source || "manual", fbx.as_of);
 
       }catch(e){
         console.error(e);
-        updatedEl.textContent = "Couldn’t load data.";
+        updatedEl.textContent = "Couldn’t load data. (Open console for error)";
         cardsEl.innerHTML = `
           <div class="card" style="grid-column:span 12">
             <div class="label">Couldn’t load Market Pulse</div>
             <div class="muted" style="margin-top:8px">
-              Make sure <code>data/market.json</code> exists and is deployed by GitHub Pages.
-              Then hard refresh (Ctrl+Shift+R) or open with <code>?v=1</code>.
+              Try opening <code>/data/market.json</code> directly.
+              Then hard refresh (Ctrl+Shift+R) or open this page with <code>?v=1</code>.
             </div>
           </div>`;
       }
     }
 
+    document.getElementById("refreshBtn").addEventListener("click", load);
     load();
   </script>
 </body>
