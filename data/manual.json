@@ -1,9 +1,20 @@
 {
-  "drewry_wci": {
-    "name": "Drewry WCI (manual)",
-    "unit": "USD / 40ft",
+  "wci": {
     "value": null,
-    "source_url": "",
-    "note": "WCI is proprietary; update manually here until you have a licensed data source."
+    "as_of": null,
+    "source": "Manual input",
+    "note": "Paste the latest Drewry WCI when available."
+  },
+  "bdi": {
+    "value": null,
+    "as_of": null,
+    "source": "Manual input",
+    "note": "Paste the latest Baltic Dry Index when available."
+  },
+  "fbx": {
+    "value": null,
+    "as_of": null,
+    "source": "Manual input",
+    "note": "Paste the latest Freightos FBX when available."
   }
 }
