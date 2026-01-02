@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-01-02T11:13:17+00:00",
+  "series": {
+    "usdtry": {
+      "value": 42.965,
+      "unit": "TRY per USD",
+      "source": "auto (frankfurter.dev)",
+      "as_of": "2025-12-31"
+    },
+    "wci": {
+      "value": 2213,
+      "unit": "USD/40ft",
+      "source": "manual",
+      "as_of": "2026-01-02"
+    },
+    "bdi": {
+      "value": 1877,
+      "unit": "Index",
+      "source": "manual",
+      "as_of": "2026-01-02"
+    },
+    "fbx": {
+      "value": 2066,
+      "unit": "Index",
+      "source": "manual",
+      "as_of": "2026-01-02"
+    }
+  }
+}
