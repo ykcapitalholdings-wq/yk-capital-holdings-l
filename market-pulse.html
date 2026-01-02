@@ -71,7 +71,8 @@
 
       try{
         // THIS is where your code goes (inside the page JS)
-        const url = `data/market.json?v=${Date.now()}`;
+       const url = `data/market.json?v=${Date.now()}`;
+const resp = await fetch(url, { cache: "no-store" });
         const resp = await fetch(url, { cache: "no-store" });
         if(!resp.ok) throw new Error("HTTP " + resp.status);
 
