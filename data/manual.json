@@ -1,23 +1,8 @@
 {
-  "bdi": {
-    "label": "Baltic Dry Index (BDI)",
-    "value": 1.877,
-    "unit": "index",
-    "as_of": 02/11/2026,
-    "source": "manual"
-  },
-  "wci": {
-    "label": "Drewry World Container Index (WCI)",
-    "value": $2,213,
-    "unit": "USD/FEU",
-    "as_of": 02/01/2026,
-    "source": "manual"
-  },
-  "fbx": {
-    "label": "Freightos Baltic Index (FBX)",
-    "value":  2,066.25,
-    "unit": "USD/FEU",
-    "as_of": 02/01/2026,
-    "source": "manual"
+  "as_of": "2026-01-02",
+  "series": {
+    "wci": { "value": 2213, "unit": "USD/40ft", "source": "manual", "as_of": "2026-01-02" },
+    "bdi": { "value": 1877, "unit": "Index", "source": "manual", "as_of": "2026-01-02" },
+    "fbx": { "value": 2066, "unit": "Index", "source": "manual", "as_of": "2026-01-02" }
   }
 }
