@@ -1,235 +1,103 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Market Pulse — Y&K Capital Holdings</title>
-  <meta name="color-scheme" content="dark" />
-  <style>
-    :root{
-      --bg:#070b14;
-      --panel:#0d1426;
-      --panel2:#0b1222;
-      --text:#e8eefc;
-      --muted:#9fb0d0;
-      --border:rgba(255,255,255,.08);
-      --accent:#2f6bff;
-      --good:#19c37d;
-      --bad:#ff4d4d;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      background:radial-gradient(1200px 700px at 20% 0%, #0e1a39 0%, var(--bg) 55%);
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 80px;}
-    .top{
-      display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-    h1{margin:0;font-size:28px;letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:13px;margin-top:6px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      padding:8px 10px;border-radius:999px;
-      color:var(--muted);font-size:12px;
-    }
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent);opacity:.9}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      gap:14px;
-      margin-top:14px;
-    }
-    .card{
-      grid-column:span 6;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:16px;
-      box-shadow:0 12px 40px rgba(0,0,0,.35);
-      overflow:hidden;
-      position:relative;
-    }
-    @media (max-width:860px){ .card{grid-column:span 12;} }
-    .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-    .name{font-weight:700;font-size:15px}
-    .src a{color:var(--muted);text-decoration:none;font-size:12px}
-    .src a:hover{color:var(--text)}
-    .value{font-size:30px;font-weight:800;margin-top:10px}
-    .meta{margin-top:8px;color:var(--muted);font-size:12px;display:flex;gap:10px;flex-wrap:wrap}
-    .chg.good{color:var(--good)}
-    .chg.bad{color:var(--bad)}
-    .spark{margin-top:12px;height:44px;width:100%}
-    .footer{
-      margin-top:22px;
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      color:var(--muted);font-size:12px;
-      border-top:1px solid var(--border);
-      padding-top:14px;
-    }
-    .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      padding:10px 12px;border-radius:12px;
-      text-decoration:none;font-weight:700;font-size:13px;
-    }
-    .btn:hover{border-color:rgba(255,255,255,.18)}
-    .tiny{font-size:11px;color:var(--muted)}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <h1>Market Pulse</h1>
-        <div class="sub">Auto-updated market signals (FX, freight, shipping) — powered by scheduled updates.</div>
-      </div>
-      <div class="pill" id="statusPill">
-        <span class="dot"></span>
-        <span id="statusText">Loading…</span>
-      </div>
-    </div>
+import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+import urllib.request
 
-    <div class="grid" id="cards"></div>
+ROOT = Path(_file_).resolve().parents[1]
+DATA_DIR = ROOT / "data"
+MANUAL_PATH = DATA_DIR / "manual.json"
+OUT_PATH = DATA_DIR / "market.json"
 
-    <div class="footer">
-      <div class="tiny">
-        Notes: Freight/indices may be delayed. Some proprietary indexes may require licensed access.
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn" href="./index.html">← Back to Home</a>
-        <a class="btn" href="./market-pulse.html">Refresh</a>
-      </div>
-    </div>
-  </div>
+def utc_now_iso():
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
-<script>
-  const fmtNumber = (x) => {
-    if (x === null || x === undefined || Number.isNaN(x)) return "—";
-    const abs = Math.abs(x);
-    if (abs >= 1e9) return (x/1e9).toFixed(2) + "B";
-    if (abs >= 1e6) return (x/1e6).toFixed(2) + "M";
-    if (abs >= 1e3) return x.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return (abs >= 10 ? x.toFixed(2) : x.toFixed(4));
-  };
+def load_manual():
+    if MANUAL_PATH.exists():
+        return json.loads(MANUAL_PATH.read_text(encoding="utf-8"))
+    return {}
 
-  const fmtMoney = (x, ccy="$") => {
-    if (x === null || x === undefined || Number.isNaN(x)) return "—";
-    return ccy + fmtNumber(x);
-  };
+def fetch_json(url, timeout=20):
+    req = urllib.request.Request(url, headers={"User-Agent": "ykcapitalholdings-market-pulse/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
 
-  function sparklineSVG(points, width=460, height=44){
-    const vals = points.filter(p => typeof p === "number" && isFinite(p));
-    if (vals.length < 2) return `<svg viewBox="0 0 ${width} ${height}" class="spark"></svg>`;
-    const min = Math.min(...vals), max = Math.max(...vals);
-    const pad = 3;
-    const scaleX = (i) => pad + (i*(width-2*pad)/(vals.length-1));
-    const scaleY = (v) => {
-      if (max === min) return height/2;
-      return pad + (height-2*pad) * (1 - ((v-min)/(max-min)));
-    };
-    let d = "";
-    vals.forEach((v,i)=>{
-      const x = scaleX(i), y = scaleY(v);
-      d += (i===0?`M ${x} ${y}`:` L ${x} ${y}`);
-    });
-
-    // area
-    const area = `${d} L ${pad + (width-2*pad)} ${height-pad} L ${pad} ${height-pad} Z`;
-
-    return `
-      <svg viewBox="0 0 ${width} ${height}" class="spark" preserveAspectRatio="none">
-        <path d="${area}" fill="rgba(47,107,255,.10)"></path>
-        <path d="${d}" fill="none" stroke="rgba(47,107,255,.85)" stroke-width="2" stroke-linecap="round"></path>
-      </svg>
-    `;
-  }
-
-  function calcChange(series){
-    if (!Array.isArray(series) || series.length < 2) return null;
-    const a = series[series.length-2]?.v;
-    const b = series[series.length-1]?.v;
-    if (![a,b].every(x => typeof x === "number" && isFinite(x))) return null;
-    const pct = (b - a) / (Math.abs(a) || 1) * 100;
-    return {a,b,pct};
-  }
-
-  function cardHTML(item){
-    const series = item.series || [];
-    const last = series[series.length-1] || {};
-    const chg = calcChange(series);
-    const sparkVals = series.slice(-30).map(p => p.v);
-
-    let valueText = "—";
-    if (item.format === "fx") valueText = fmtNumber(last.v);
-    else if (item.format === "usd") valueText = fmtMoney(last.v, "$");
-    else valueText = fmtNumber(last.v);
-
-    let chgHTML = "";
-    if (chg){
-      const cls = chg.pct >= 0 ? "good" : "bad";
-      const sign = chg.pct >= 0 ? "+" : "";
-      chgHTML = `<span class="chg ${cls}">${sign}${chg.pct.toFixed(2)}%</span>`;
-    } else {
-      chgHTML = `<span class="chg">—</span>`;
+def get_usdtry_frankfurter():
+    # Frankfurter API (ECB-based). No key.
+    # Docs: https://www.frankfurter.app/
+    data = fetch_json("https://api.frankfurter.app/latest?from=USD&to=TRY")
+    rate = data["rates"]["TRY"]
+    as_of = data.get("date")  # YYYY-MM-DD
+    return {
+        "id": "usdtry",
+        "label": "USD/TRY",
+        "value": rate,
+        "unit": "",
+        "source": "Frankfurter (ECB)",
+        "as_of": as_of,
+        "status": "ok",
+        "note": "ECB-based daily rate (not intraday)."
     }
 
-    const updated = last.t ? new Date(last.t).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—";
-
-    return `
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="name">${item.name}</div>
-            <div class="meta">
-              <span>${item.unit || ""}</span>
-              <span>Updated: ${updated}</span>
-              ${chgHTML}
-            </div>
-          </div>
-          <div class="src">${item.source_url ? `<a href="${item.source_url}" target="_blank" rel="noopener">Source ↗</a>` : ""}</div>
-        </div>
-        <div class="value">${valueText}</div>
-        ${sparklineSVG(sparkVals)}
-      </div>
-    `;
-  }
-
-  async function load(){
-    const pill = document.getElementById("statusPill");
-    const statusText = document.getElementById("statusText");
-    const cards = document.getElementById("cards");
-
-    try{
-      // cache-bust so you always see the newest JSON
-      const res = await fetch("./data/market.json?v=" + Date.now(), {cache:"no-store"});
-      if(!res.ok) throw new Error("Failed to load market.json");
-      const data = await res.json();
-
-      const updated = data.generated_at ? new Date(data.generated_at).toISOString().replace("T"," ").slice(0,16) + " UTC" : "—";
-      statusText.textContent = `Last sync: ${updated}`;
-
-      const items = data.items || [];
-      cards.innerHTML = items.map(cardHTML).join("");
-
-    }catch(e){
-      statusText.textContent = "Data unavailable (try refresh)";
-      console.error(e);
-      cards.innerHTML = `<div class="card" style="grid-column:span 12">
-        <div class="name">Couldn’t load Market Pulse data</div>
-        <div class="meta">Make sure <code>data/market.json</code> exists and GitHub Actions is running.</div>
-      </div>`;
+def manual_series(manual, key, label, unit, source_note):
+    entry = manual.get(key, {})
+    val = entry.get("value", None)
+    as_of = entry.get("as_of", None)
+    note = entry.get("note", source_note)
+    status = "manual" if val is not None else "missing"
+    return {
+        "id": key,
+        "label": label,
+        "value": val,
+        "unit": unit,
+        "source": entry.get("source", "Manual input"),
+        "as_of": as_of,
+        "status": status,
+        "note": note
     }
-  }
 
-  load();
-</script>
-</body>
-</html>
+def main():
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    manual = load_manual()
+
+    series = []
+
+    # Auto
+    try:
+        series.append(get_usdtry_frankfurter())
+    except Exception as e:
+        series.append({
+            "id": "usdtry",
+            "label": "USD/TRY",
+            "value": None,
+            "unit": "",
+            "source": "Frankfurter (ECB)",
+            "as_of": None,
+            "status": "error",
+            "note": f"Failed to fetch: {e}"
+        })
+
+    # Manual placeholders (until you have a licensed source / API)
+    series.append(manual_series(
+        manual, "wci", "Drewry World Container Index (WCI)", "USD/40ft",
+        "Often proprietary; keep manual unless you have licensed access."
+    ))
+    series.append(manual_series(
+        manual, "bdi", "Baltic Dry Index (BDI)", "Index",
+        "Often behind licensed feeds; keep manual unless you have an API."
+    ))
+    series.append(manual_series(
+        manual, "fbx", "Freightos Baltic Index (FBX)", "Index",
+        "Often proprietary; keep manual unless you have an API."
+    ))
+
+    out = {
+        "generated_at": utc_now_iso(),
+        "series": series
+    }
+
+    OUT_PATH.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"Wrote {OUT_PATH} with {len(series)} series.")
+
+if _name_ == "_main_":
+    main()
