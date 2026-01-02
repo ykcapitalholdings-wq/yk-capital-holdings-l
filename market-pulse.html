@@ -1,103 +1,112 @@
-import json
-import os
-from datetime import datetime, timezone
-from pathlib import Path
-import urllib.request
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Market Pulse — Y&K Capital Holdings</title>
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#070b14;color:#eaf0ff}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px}
+    a{color:#9ec2ff;text-decoration:none}
+    .top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+    h1{margin:0;font-size:28px}
+    .muted{color:rgba(234,240,255,.7);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{
+      grid-column:span 6;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;padding:16px
+    }
+    @media(max-width:860px){.card{grid-column:span 12}}
+    .label{font-weight:800}
+    .value{font-size:34px;font-weight:900;margin-top:10px}
+    .meta{margin-top:8px;display:flex;gap:10px;flex-wrap:wrap}
+    code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:8px}
+  </style>
+</head>
 
-ROOT = Path(_file_).resolve().parents[1]
-DATA_DIR = ROOT / "data"
-MANUAL_PATH = DATA_DIR / "manual.json"
-OUT_PATH = DATA_DIR / "market.json"
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Market Pulse</h1>
+        <div class="muted">Auto-updated where possible. Manual for paid/proprietary indices.</div>
+        <div class="muted" id="updated">Loading…</div>
+      </div>
+      <div><a href="index.html">← Back to Home</a></div>
+    </div>
 
-def utc_now_iso():
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    <div class="grid" id="cards"></div>
 
-def load_manual():
-    if MANUAL_PATH.exists():
-        return json.loads(MANUAL_PATH.read_text(encoding="utf-8"))
-    return {}
+    <div class="muted" style="margin-top:14px">
+      If you see “Couldn’t load data”, make sure <code>data/market.json</code> exists in your repo.
+    </div>
+  </div>
 
-def fetch_json(url, timeout=20):
-    req = urllib.request.Request(url, headers={"User-Agent": "ykcapitalholdings-market-pulse/1.0"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
-
-def get_usdtry_frankfurter():
-    # Frankfurter API (ECB-based). No key.
-    # Docs: https://www.frankfurter.app/
-    data = fetch_json("https://api.frankfurter.app/latest?from=USD&to=TRY")
-    rate = data["rates"]["TRY"]
-    as_of = data.get("date")  # YYYY-MM-DD
-    return {
-        "id": "usdtry",
-        "label": "USD/TRY",
-        "value": rate,
-        "unit": "",
-        "source": "Frankfurter (ECB)",
-        "as_of": as_of,
-        "status": "ok",
-        "note": "ECB-based daily rate (not intraday)."
+  <script>
+    function fmt(x){
+      if (x === null || x === undefined || Number.isNaN(x)) return "—";
+      const n = Number(x);
+      return (Math.abs(n) >= 1000) ? n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : n.toFixed(4);
     }
 
-def manual_series(manual, key, label, unit, source_note):
-    entry = manual.get(key, {})
-    val = entry.get("value", None)
-    as_of = entry.get("as_of", None)
-    note = entry.get("note", source_note)
-    status = "manual" if val is not None else "missing"
-    return {
-        "id": key,
-        "label": label,
-        "value": val,
-        "unit": unit,
-        "source": entry.get("source", "Manual input"),
-        "as_of": as_of,
-        "status": status,
-        "note": note
+    function card(label, value, unit, source, asOf){
+      return `
+        <div class="card">
+          <div class="label">${label}</div>
+          <div class="value">${value}</div>
+          <div class="meta muted">
+            <span>${unit || ""}</span>
+            <span>As of: ${asOf || "—"}</span>
+            <span>Source: ${source || "—"}</span>
+          </div>
+        </div>
+      `;
     }
 
-def main():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    manual = load_manual()
+    async function load(){
+      const cardsEl = document.getElementById("cards");
+      const updatedEl = document.getElementById("updated");
 
-    series = []
+      try{
+        // THIS is where your code goes (inside the page JS)
+        const url = data/market.json?v=${Date.now()};
+        const resp = await fetch(url, { cache: "no-store" });
+        if(!resp.ok) throw new Error("HTTP " + resp.status);
 
-    # Auto
-    try:
-        series.append(get_usdtry_frankfurter())
-    except Exception as e:
-        series.append({
-            "id": "usdtry",
-            "label": "USD/TRY",
-            "value": None,
-            "unit": "",
-            "source": "Frankfurter (ECB)",
-            "as_of": None,
-            "status": "error",
-            "note": f"Failed to fetch: {e}"
-        })
+        const data = await resp.json();
 
-    # Manual placeholders (until you have a licensed source / API)
-    series.append(manual_series(
-        manual, "wci", "Drewry World Container Index (WCI)", "USD/40ft",
-        "Often proprietary; keep manual unless you have licensed access."
-    ))
-    series.append(manual_series(
-        manual, "bdi", "Baltic Dry Index (BDI)", "Index",
-        "Often behind licensed feeds; keep manual unless you have an API."
-    ))
-    series.append(manual_series(
-        manual, "fbx", "Freightos Baltic Index (FBX)", "Index",
-        "Often proprietary; keep manual unless you have an API."
-    ))
+        updatedEl.textContent = "Last sync (UTC): " + (data.updated_at || data.generated_at || "—");
 
-    out = {
-        "generated_at": utc_now_iso(),
-        "series": series
+        const series = data.series || {};
+        // expected keys: usdtry, wci, bdi, fbx (from the Python script we used)
+        const usdtry = series.usdtry || {};
+        const wci = series.wci || {};
+        const bdi = series.bdi || {};
+        const fbx = series.fbx || {};
+
+        cardsEl.innerHTML =
+          card("USD/TRY", fmt(usdtry.value), usdtry.unit || "TRY per USD", usdtry.source || "auto", usdtry.as_of) +
+          card("Drewry WCI", wci.value ?? "—", wci.unit || "USD/40ft", wci.source || "manual", wci.as_of) +
+          card("BDI", bdi.value ?? "—", bdi.unit || "Index", bdi.source || "manual", bdi.as_of) +
+          card("Freightos FBX", fbx.value ?? "—", fbx.unit || "Index / USD", fbx.source || "manual", fbx.as_of);
+
+      }catch(e){
+        console.error(e);
+        updatedEl.textContent = "Couldn’t load data.";
+        cardsEl.innerHTML = `
+          <div class="card" style="grid-column:span 12">
+            <div class="label">Couldn’t load Market Pulse</div>
+            <div class="muted" style="margin-top:8px">
+              Make sure <code>data/market.json</code> exists and is deployed by GitHub Pages.
+              Then hard refresh (Ctrl+Shift+R) or open with <code>?v=1</code>.
+            </div>
+          </div>`;
+      }
     }
 
-    OUT_PATH.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"Wrote {OUT_PATH} with {len(series)} series.")
-
-if _name_ == "_main_":
-    main()
+    load();
+  </script>
+</body>
+</html>
