@@ -1,0 +1,9 @@
+{
+  "drewry_wci": {
+    "name": "Drewry WCI (manual)",
+    "unit": "USD / 40ft",
+    "value": null,
+    "source_url": "",
+    "note": "WCI is proprietary; update manually here until you have a licensed data source."
+  }
+}
