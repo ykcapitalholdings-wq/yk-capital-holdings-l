@@ -32,7 +32,7 @@
       <div>
         <h1>Market Pulse</h1>
         <div class="muted">Auto-updated where possible. Manual for paid/proprietary indices.</div>
-        <div class="muted" id="updated">Loading…</div>
+        <div class="muted" id="updated">Loading data…</div>
       </div>
       <div><a href="index.html">← Back to Home</a></div>
     </div>
@@ -40,7 +40,7 @@
     <div class="grid" id="cards"></div>
 
     <div class="muted" style="margin-top:14px">
-      If you see “Couldn’t load data”, make sure <code>data/market.json</code> exists in your repo.
+      If you see “Couldn’t load data”, make sure <code>data/market.json</code> exists in your repo and is deployed by GitHub Pages.
     </div>
   </div>
 
@@ -48,7 +48,9 @@
     function fmt(x){
       if (x === null || x === undefined || Number.isNaN(x)) return "—";
       const n = Number(x);
-      return (Math.abs(n) >= 1000) ? n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : n.toFixed(4);
+      return (Math.abs(n) >= 1000)
+        ? n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        : n.toFixed(4);
     }
 
     function card(label, value, unit, source, asOf){
@@ -70,22 +72,21 @@
       const updatedEl = document.getElementById("updated");
 
       try{
-        // THIS is where your code goes (inside the page JS)
-       const url = `data/market.json?v=${Date.now()}`;
-const resp = await fetch(url, { cache: "no-store" });
+        // Cache-bust so you always get the newest JSON from GitHub Pages/CDN
+        const url = data/market.json?v=${Date.now()};
         const resp = await fetch(url, { cache: "no-store" });
         if(!resp.ok) throw new Error("HTTP " + resp.status);
 
         const data = await resp.json();
 
-        updatedEl.textContent = "Last sync (UTC): " + (data.updated_at || data.generated_at || "—");
+        updatedEl.textContent =
+          "Last sync (UTC): " + (data.updated_at || data.generated_at || "—");
 
         const series = data.series || {};
-        // expected keys: usdtry, wci, bdi, fbx (from the Python script we used)
         const usdtry = series.usdtry || {};
-        const wci = series.wci || {};
-        const bdi = series.bdi || {};
-        const fbx = series.fbx || {};
+        const wci   = series.wci   || {};
+        const bdi   = series.bdi   || {};
+        const fbx   = series.fbx   || {};
 
         cardsEl.innerHTML =
           card("USD/TRY", fmt(usdtry.value), usdtry.unit || "TRY per USD", usdtry.source || "auto", usdtry.as_of) +
