@@ -94,7 +94,6 @@
     .mutedLink{color:var(--muted2);text-decoration:none}
     .mutedLink:hover{text-decoration:underline}
 
-    /* Optional: small highlight box */
     .notice{
       margin-top:14px;
       padding:14px;
@@ -105,6 +104,17 @@
       font-size:13px;
       line-height:1.55;
     }
+    .contactBox{
+      margin-top:14px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(34,49,77,.85);
+      background:rgba(15,21,36,.55);
+    }
+    .contactRow{
+      display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:10px;
+    }
+    .contactLabel{font-weight:650}
   </style>
 </head>
 
@@ -124,6 +134,7 @@
         <a href="#offer">Offer</a>
         <a href="#how">How it works</a>
         <a href="#quote">Request</a>
+        <a href="#contact">Contact</a>
         <a href="./market-pulse.html">Market Pulse</a>
       </div>
     </div>
@@ -148,7 +159,8 @@
       <div class="btnrow">
         <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc1AUACXD_Wbwrbv1MMDaJ8ldf0Nm2cJTesykexqfICDIXMTA/viewform?usp=dialog" target="_blank" rel="noopener">Request a Quote</a>
 
-        <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20%E2%80%94%20I%E2%80%99d%20like%20a%20textile%20manufacturing%20quote%20(UK%2FEU).%20Product:%20__%20Qty:%20__%20Fabric:%20__%20Sizes:%20__%20Branding(label/print/emb):%20__%20Destination:%20__%20Deadline:%20__">WhatsApp</a>
+        <!-- Friend WhatsApp: EN + TR auto-message -->
+        <a class="btn" href="https://wa.me/905335120572?text=Hi%20Y%26K%20Capital%20%E2%80%94%20I%E2%80%99d%20like%20a%20textile%20manufacturing%20quote%20for%20UK%2FEU.%0AProduct%3A%20__%0AQty%3A%20__%0AFabric%2FComposition%3A%20__%0ASizes%20%2B%20Ratio%3A%20__%0ABranding%20(label%2Fprint%2Femb)%3A%20__%0ADestination%3A%20__%0ADeadline%3A%20__%0A%0AMerhaba%20Y%26K%20Capital%20%E2%80%94%20UK%2FAvrupa%20i%C3%A7in%20tekstil%20%C3%BCretim%20teklifi%20istiyorum.%0A%C3%9Cr%C3%BCn%3A%20__%0AAdet%3A%20__%0AKuma%C5%9F%2F%C4%B0%C3%A7erik%3A%20__%0ABeden%20%2B%20Da%C4%9F%C4%B1l%C4%B1m%3A%20__%0ABask%C4%B1%2Fetiket%2Fnaki%C5%9F%3A%20__%0ATeslim%20yeri%3A%20__%0AHedef%20tarih%3A%20__">WhatsApp (Production)</a>
 
         <a class="btn ghost" href="mailto:ykcapitalholdings@gmail.com?subject=Textile%20Manufacturing%20Quote%20Request%20(UK%2FEU)">Email</a>
       </div>
@@ -156,6 +168,15 @@
       <div class="notice">
         <b>Fast quote tip:</b> Share product photos (front/back), fabric preference (or composition/GSM),
         sizes + size ratio (e.g., S/M/L/XL), quantities per color, and your delivery location (UK/EU).
+      </div>
+
+      <!-- Contact quick box -->
+      <div class="contactBox" id="contact" style="margin-top:16px">
+        <div class="contactLabel">Contact</div>
+        <div class="contactRow small">
+          <div><b>Email:</b> <a class="mutedLink" href="mailto:ykcapitalholdings@gmail.com">ykcapitalholdings@gmail.com</a></div>
+          <div><b>WhatsApp (Production):</b> <a class="mutedLink" href="https://wa.me/905335120572">+90 533 512 05 72</a></div>
+        </div>
       </div>
 
       <p class="small" style="margin-top:14px">
@@ -253,7 +274,8 @@
     <!-- Footer -->
     <div class="footer">
       <div class="small">
-        Business inquiries: <a class="mutedLink" href="mailto:ykcapitalholdings@gmail.com">ykcapitalholdings@gmail.com</a>
+        Email: <a class="mutedLink" href="mailto:ykcapitalholdings@gmail.com">ykcapitalholdings@gmail.com</a> ·
+        WhatsApp (Production): <a class="mutedLink" href="https://wa.me/905335120572">+90 533 512 05 72</a>
       </div>
       <div class="small">
         <a class="mutedLink" href="./index.html">Home</a> ·
