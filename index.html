@@ -6,11 +6,31 @@
   <title>Y&K Capital Holdings LLC — US / EU ↔️ Turkey Trade, Logistics & Manufacturing</title>
   <meta name="description" content="US/EU↔️Turkey trade & logistics coordination + textile manufacturing export support. Fast quoting, bilingual communication (EN/TR), proactive updates." />
 
-  <!-- Social share -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.ykcapitalholdings.com/" />
+
+  <!-- Favicon + App Icons -->
+  <link rel="icon" href="/assets/logo.jpeg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="/assets/logo.jpeg" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <!-- Open Graph (Facebook/WhatsApp/LinkedIn) -->
   <meta property="og:title" content="Y&K Capital Holdings LLC — US / EU ↔️ Turkey Trade, Logistics & Manufacturing" />
-  <meta property="og:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates—via a trusted partner network." />
+  <meta property="og:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates—via a trusted partner network. Textile manufacturing export support for UK/EU." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.ykcapitalholdings.com/" />
+  <meta property="og:image" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
+  <meta property="og:image:secure_url" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <!-- Optional sizes (remove if you don't know exact) -->
+  <!-- <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" /> -->
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Y&K Capital Holdings LLC — US / EU ↔️ Turkey Trade, Logistics & Manufacturing" />
+  <meta name="twitter:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates. Textile manufacturing export support for UK/EU." />
+  <meta name="twitter:image" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
 
   <style>
     :root{
@@ -35,8 +55,24 @@
       background:rgba(11,15,25,.72);
       border-bottom:1px solid rgba(34,49,77,.65);
     }
-    .navinner{max-width:1040px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:10px}
+    .navinner{
+      max-width:1040px;margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
+    }
+
+    /* Brand block */
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      flex:0 0 auto;
+    }
+
     .badge{
       display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;
       background:var(--panel); border:1px solid var(--border); color:var(--muted2);
@@ -100,12 +136,17 @@
   <div class="nav">
     <div class="navinner">
       <div class="brand">
-        <span class="badge">US / EU ↔️ TR</span>
+        <!-- Logo -->
+        <img class="logo" src="/assets/logo.jpeg" alt="Y&K Capital Holdings LLC logo" />
+
+        <!-- Text -->
         <div>
-          <div style="font-weight:750;letter-spacing:-.2px">Y&K Capital Holdings LLC</div>
+          <span class="badge">US / EU ↔️ TR</span>
+          <div style="font-weight:750;letter-spacing:-.2px;margin-top:6px">Y&K Capital Holdings LLC</div>
           <div class="small">Trade, Logistics & Manufacturing</div>
         </div>
       </div>
+
       <div class="links">
         <a href="#services">Services</a>
         <a href="#how">How it works</a>
@@ -164,14 +205,14 @@
       </div>
     </div>
 
-    <!-- NEW: Textile / Manufacturing -->
+    <!-- Textile / Manufacturing -->
     <div class="section" id="textile">
       <h2>Textile Manufacturing Export (UK / EU)</h2>
       <div class="twoCol">
         <div class="card">
           <div class="miniTitle">What we produce</div>
           <p class="small">
-            Women’s apparel manufacturing in Türkiye (excluding lingerie): pants, suits/sets, shirts, jackets/blazers, and dresses.
+            Women’s apparel manufacturing in Türkiye: pants, suits/sets, shirts, jackets/blazers, and dresses.
             We support sampling → bulk production → packaging/labels → export coordination.
           </p>
           <div class="btnrow" style="margin-top:14px">
@@ -285,7 +326,6 @@
       Note: Services provided through licensed carrier/forwarding and customs partners where required.<br/>
       Not: Gerekli durumlarda hizmetler, lisanslı taşıyıcı/forwarder ve gümrük iş ortakları üzerinden sağlanır.
     </div>
-
   </div>
 </body>
 </html>
