@@ -10,11 +10,11 @@
   <link rel="canonical" href="https://www.ykcapitalholdings.com/" />
 
   <!-- Favicon + App Icons -->
-  <link rel="icon" href="/assets/logo.jpeg" type="image/jpeg" />
-  <link rel="apple-touch-icon" href="/assets/logo.jpeg" />
+  <link rel="icon" href="assets/logo.jpeg" type="image/jpeg" />
+  <link rel="apple-touch-icon" href="assets/logo.jpeg" />
   <meta name="theme-color" content="#0b0f19" />
 
-  <!-- Open Graph (Facebook/WhatsApp/LinkedIn) -->
+  <!-- Open Graph (WhatsApp/Telegram/Discord/iMessage/etc) -->
   <meta property="og:title" content="Y&K Capital Holdings LLC — US / EU ↔️ Turkey Trade, Logistics & Manufacturing" />
   <meta property="og:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates—via a trusted partner network. Textile manufacturing export support for UK/EU." />
   <meta property="og:type" content="website" />
@@ -22,15 +22,6 @@
   <meta property="og:image" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
   <meta property="og:image:secure_url" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
   <meta property="og:image:type" content="image/jpeg" />
-  <!-- Optional sizes (remove if you don't know exact) -->
-  <!-- <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" /> -->
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Y&K Capital Holdings LLC — US / EU ↔️ Turkey Trade, Logistics & Manufacturing" />
-  <meta name="twitter:description" content="Fast quoting, bilingual EN/TR communication, proactive shipment updates. Textile manufacturing export support for UK/EU." />
-  <meta name="twitter:image" content="https://www.ykcapitalholdings.com/assets/logo.jpeg" />
 
   <style>
     :root{
@@ -60,15 +51,16 @@
       display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap
     }
 
-    /* Brand block */
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:40px;
-      height:40px;
-      border-radius:12px;
+      width:44px;
+      height:44px;
       object-fit:cover;
-      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.06);
+      padding:4px;
+      display:block;
       box-shadow:0 10px 30px rgba(0,0,0,.25);
       flex:0 0 auto;
     }
@@ -120,8 +112,6 @@
     }
     .mutedLink{color:var(--muted2);text-decoration:none}
     .mutedLink:hover{text-decoration:underline}
-
-    /* Optional highlight link for Textile */
     .links a.highlight{
       background:rgba(43,92,255,.14);
       border-color:rgba(43,92,255,.28);
@@ -132,14 +122,10 @@
 </head>
 
 <body>
-  <!-- Top Nav -->
   <div class="nav">
     <div class="navinner">
       <div class="brand">
-        <!-- Logo -->
-        <img class="logo" src="/assets/logo.jpeg" alt="Y&K Capital Holdings LLC logo" />
-
-        <!-- Text -->
+        <img class="logo" src="assets/logo.jpeg?v=1" alt="Y&K Capital Holdings LLC logo" />
         <div>
           <span class="badge">US / EU ↔️ TR</span>
           <div style="font-weight:750;letter-spacing:-.2px;margin-top:6px">Y&K Capital Holdings LLC</div>
@@ -159,7 +145,6 @@
   </div>
 
   <div class="wrap">
-    <!-- Hero -->
     <div class="hero">
       <h1>US / EU ↔️ Turkey<br/>Trade & Logistics</h1>
       <p>
@@ -169,15 +154,10 @@
 
       <div class="btnrow">
         <a class="btn primary" href="./quote.html">Get a Quote (Form)</a>
-
         <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20Holdings%20%E2%80%94%20I%E2%80%99d%20like%20a%20shipping%20quote%20(US%2FEU%E2%86%94TR).%20Pickup:%20__%20Delivery:%20__%20Weight(kg):%20__%20Volume(CBM):%20__%20Incoterm:%20__%20Ready%20date:%20__">WhatsApp Quote</a>
-
         <a class="btn ghost" href="mailto:ykcapitalholdings@gmail.com?subject=Quote%20Request%20(US%2FEU%E2%86%94TR)">Email</a>
-
         <a class="btn ghost" href="https://instagram.com/ykcapitalholdings">Instagram</a>
-
         <a class="btn ghost" href="./textile-export.html">Textile Export (UK/EU)</a>
-
         <a class="btn ghost" href="./market-pulse.html">Market Pulse</a>
       </div>
 
@@ -186,7 +166,6 @@
       </p>
     </div>
 
-    <!-- Services -->
     <div class="section" id="services">
       <h2>Services</h2>
       <div class="grid grid-3">
@@ -205,7 +184,6 @@
       </div>
     </div>
 
-    <!-- Textile / Manufacturing -->
     <div class="section" id="textile">
       <h2>Textile Manufacturing Export (UK / EU)</h2>
       <div class="twoCol">
@@ -234,7 +212,6 @@
       </div>
     </div>
 
-    <!-- How it works -->
     <div class="section" id="how">
       <h2>How it works</h2>
       <div class="grid grid-3">
@@ -253,44 +230,8 @@
       </div>
     </div>
 
-    <!-- Quote shortcut -->
-    <div class="section" id="quote">
-      <h2>Get a Quote</h2>
-      <div class="twoCol">
-        <div class="card">
-          <div class="miniTitle">Send us this info (fastest quote)</div>
-          <ul class="list">
-            <li>Pickup city/state + delivery city</li>
-            <li>Cargo description + packaging type (boxes/pallets)</li>
-            <li>Weight (kg) + volume (CBM) / dimensions</li>
-            <li>Incoterm (EXW / FOB / CIF / DDP)</li>
-            <li>Ready date + any deadline</li>
-          </ul>
-          <div class="btnrow" style="margin-top:14px">
-            <a class="btn primary" href="./quote.html">Open Quote Form</a>
-            <a class="btn" href="https://wa.me/905360340313?text=Hi%20Y%26K%20Capital%20Holdings%20%E2%80%94%20I%E2%80%99d%20like%20a%20shipping%20quote%20(US%2FEU%E2%86%94TR).%20Pickup:%20__%20Delivery:%20__%20Weight(kg):%20__%20Volume(CBM):%20__%20Incoterm:%20__%20Ready%20date:%20__">WhatsApp Quote</a>
-            <a class="btn ghost" href="mailto:ykcapitalholdings@gmail.com?subject=Quote%20Request%20(US%2FEU%E2%86%94TR)">Email</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="miniTitle">What you’ll receive</div>
-          <ul class="list">
-            <li>Recommended shipping mode (Ocean/Air)</li>
-            <li>Routing & timeline overview</li>
-            <li>Document checklist (basic)</li>
-            <li>Operational notes (holiday/terminal schedules if relevant)</li>
-          </ul>
-          <p class="small" style="margin-top:10px">
-            Tip: If you have an invoice or packing list, upload it in the form or email it for faster turnaround.
-          </p>
-        </div>
-      </div>
-    </div>
-
     <div class="divider"></div>
 
-    <!-- Bilingual -->
     <div class="section" id="bilingual">
       <h2>EN / TR</h2>
       <div class="twoCol">
@@ -309,7 +250,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
       <div class="small">
         Business inquiries: <a class="mutedLink" href="mailto:ykcapitalholdings@gmail.com">ykcapitalholdings@gmail.com</a>
