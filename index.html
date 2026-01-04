@@ -54,15 +54,15 @@
     /* Brand block */
     .brand{display:flex;align-items:center;gap:14px}
 
-    /* Bigger logo */
+    /* Logo: FULL BLEED (fills the box) */
     .logo{
       width:64px;
       height:64px;
-      object-fit:cover;
       border-radius:16px;
+      object-fit:cover;          /* fills container (may crop edges slightly) */
+      padding:0;                 /* IMPORTANT: remove inner frame */
+      background:transparent;    /* no grey background behind */
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      padding:6px;
       display:block;
       box-shadow:0 10px 30px rgba(0,0,0,.25);
       flex:0 0 auto;
@@ -128,7 +128,7 @@
   <div class="nav">
     <div class="navinner">
       <div class="brand">
-        <img class="logo" src="assets/logo.jpeg?v=2" alt="Y&K Capital Holdings LLC logo" />
+        <img class="logo" src="assets/logo.jpeg?v=3" alt="Y&K Capital Holdings LLC logo" />
         <div>
           <span class="badge">US / EU ↔️ TR</span>
           <div style="font-weight:750;letter-spacing:-.2px;margin-top:6px">Y&K Capital Holdings LLC</div>
