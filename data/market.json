@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-03-26T14:06:11+00:00",
+  "generated_at": "2026-03-26T15:52:09+00:00",
   "series": {
     "usdtry": {
-      "value": 44.357,
+      "value": 44.367,
       "unit": "TRY per USD",
       "source": "auto (frankfurter.dev)",
-      "as_of": "2026-03-25"
+      "as_of": "2026-03-26"
     },
     "wci": {
       "value": 2213,
