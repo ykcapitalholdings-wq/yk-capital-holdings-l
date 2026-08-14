@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-14T09:37:13+00:00",
+  "generated_at": "2026-08-14T11:02:17+00:00",
   "series": {
     "usdtry": {
-      "value": 47.775,
+      "value": null,
       "unit": "TRY per USD",
-      "source": "auto (frankfurter.dev)",
-      "as_of": "2026-08-13"
+      "source": "auto failed: TimeoutError",
+      "as_of": null
     },
     "wci": {
       "value": 2213,
